@@ -83,3 +83,5 @@ target_include_directories(SearchExample PRIVATE ".")
 target_link_libraries(SearchExample RemoteCapturyStatic Threads::Threads)
 
 add_custom_target(Examples DEPENDS PollingExample CallbackExample CurvesExample SearchExample)
+
+add_subdirectory(bridge)
