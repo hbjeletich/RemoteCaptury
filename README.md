@@ -1,5 +1,20 @@
 # RemoteCaptury
 
+> **New here / inheriting the lab? Read this first.**
+>
+> This repo is the **plumbing** that gets motion-capture data out of Captury. Most students never build or touch it directly — they use one of the tools on top of it:
+>
+> - **Streaming to TouchDesigner (or any OSC receiver):** use **[captury-ui](https://github.com/hbjeletich/captury-ui)**. It bundles the `bridge` built from this repo, so you just download its release and run it. See the [captury-ui "how it all fits together"](https://github.com/hbjeletich/captury-ui#how-it-all-fits-together) diagram for the full picture.
+> - **Bringing Captury data into Unity:** use **[CapturyUnityToolkit](https://github.com/hbjeletich/CapturyUnityToolkit)**, which uses Captury's own Unity plugin, not this library.
+>
+> **What's in this repo:** it is a fork of the upstream [thecaptury/RemoteCaptury](https://github.com/thecaptury/RemoteCaptury) C++ library. The parts added here on top of upstream are:
+> - **`bridge/`** — a small C++ program that connects to Captury Live and streams poses, angles, and foot-contact data over a simple line protocol (and accepts commands like snap, set-shot, and start/stop recording). **This is the program captury-ui runs.**
+> - **`captury-test/bridge.py`** — a standalone Python wrapper that drives the bridge and forwards pose data as OSC bundles (TouchDesigner-compatible). A reference/earlier version of what captury-ui now does internally; handy if you want a minimal scriptable OSC stream without the full app.
+>
+> If you're extending the streaming pipeline, those are the parts to look at. The `python/` directory is the upstream RemoteCaptury Python wrapper. Everything below is the upstream library documentation, kept for anyone building the library itself.
+
+---
+
 RemoteCaptury is a library that provides access to data streamed from Captury Studio, Captury Live, and Captury Replay. In particular, it streams poses and angle data for persons that are being tracked a Captury application. It also allows some amount of remote control of Captury Live. In particular, it allows starting and stopping to track and to record, starting and stopping calibration board detection, naming and renaming shots, etc..
 
 The primary purpose of this library is to facilitate streaming of tracking data into third party applications like game engines, or 3D applications like Motion Builder or numerical analysis software like Matlab.
